@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
 
 import { Colors } from "../../constants/colors";
 
-function PlaceForm() {
+function AdForm() {
   const [enteredTitle, setEnteredTitle] = useState("");
 
   function changeTitleHandler(enteredText) {
@@ -13,7 +13,7 @@ function PlaceForm() {
   return (
     <ScrollView style={styles.form}>
       <View>
-        <Text style={styles.label}>The Place Form</Text>
+        <Text style={styles.label}>The Rental Form</Text>
         <TextInput
           onChangeText={changeTitleHandler}
           value={enteredTitle}
@@ -24,7 +24,7 @@ function PlaceForm() {
   );
 }
 
-export default PlaceForm;
+export default AdForm;
 
 const styles = StyleSheet.create({
   form: {
