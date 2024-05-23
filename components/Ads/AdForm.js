@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
 
 import { Colors } from "../../constants/colors";
+import ImagePicker from "./ImagePicker";
 
 function AdForm() {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -20,6 +21,7 @@ function AdForm() {
           style={styles.input}
         />
       </View>
+      <ImagePicker />
     </ScrollView>
   );
 }
