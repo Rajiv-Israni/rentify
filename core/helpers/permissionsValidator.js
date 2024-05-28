@@ -1,5 +1,5 @@
 async function permissionsValidator(
-  identifier,
+  identifierName,
   identifierPermissionInformation,
   identifierPermissionStatus,
   requestPermission
@@ -19,7 +19,7 @@ async function permissionsValidator(
   ) {
     Alert.alert(
       "Insuffiecient Permissions!",
-      `You need to grant ${identifier} permissions to use this app.`
+      `You need to grant ${identifierName} permissions to use this app.`
     );
     return false;
   }
