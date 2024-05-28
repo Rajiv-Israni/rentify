@@ -7,32 +7,20 @@ import {
 } from "expo-image-picker";
 import { Colors } from "../../constants/colors";
 import OutlinedButton from "../UI/OutlinedButton";
+import permissionsValidator from "../../core/helpers/permissionsValidator";
 
 function ImagePicker() {
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
   const [pickedImage, setPickedImage] = useState();
 
-  async function verifyPermissions() {
-    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
-      const permissionResponse = await requestPermission();
-
-      return permissionResponse.granted;
-    }
-
-    if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
-      Alert.alert(
-        "Insuffiecient Permissions!",
-        "You need to grant camera permissions to use this app."
-      );
-      return false;
-    }
-
-    return true;
-  }
-
   async function takeImageHandler() {
-    const hasPermission = await verifyPermissions();
+    const hasPermission = await await permissionsValidator(
+      "camera",
+      cameraPermissionInformation,
+      PermissionStatus,
+      requestPermission
+    );
 
     if (!hasPermission) {
       return;
