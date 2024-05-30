@@ -1,11 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
 
-import AllPlaces from './screens/AllPlaces';
-import AddPlace from './screens/AddPlace';
-import IconButton from './components/UI/IconButton';
-import { Colors } from './constants/colors';
+import AllAds from "./screens/AllAds";
+import AddAd from "./screens/AddAd";
+import IconButton from "./components/UI/IconButton";
+import { Colors } from "./constants/colors";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,26 +22,26 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="All Places"
-            component={AllPlaces}
+            name="All Ads"
+            component={AllAds}
             options={({ navigation }) => ({
-              title: 'Your Favorite Places',
+              title: "Places Available To Rent",
               headerRight: ({ tintColor }) => (
                 <IconButton
                   icon="add"
                   size={24}
                   color={tintColor}
-                  onPress={() => navigation.navigate('Add Place')}
+                  onPress={() => navigation.navigate("Add Ad")}
                 />
               ),
             })}
           />
           <Stack.Screen
-            name="Add Place"
-            component={AddPlace}
+            name="Add Ad"
+            component={AddAd}
             options={{
-              title: 'Add a new Place',
-              headerBackTitle: 'Back',
+              title: "Add A New Place To Rent",
+              headerBackTitle: "Back",
             }}
           />
         </Stack.Navigator>
