@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
@@ -8,10 +8,13 @@ import {
 import OutlinedButton from "../UI/OutlinedButton";
 import { Colors } from "../../constants/colors";
 import permissionsValidator from "../../core/helpers/permissionsValidator";
+import { useState } from "react";
+import { getMapPreview } from "../../core/util/location";
 
 function LocationPicker() {
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
+  const [pickedLocation, setPickedLocation] = useState();
 
   async function getLocationHandler() {
     const hasPermission = await permissionsValidator(
@@ -26,14 +29,30 @@ function LocationPicker() {
     }
 
     const location = await getCurrentPositionAsync();
-    console.log(location);
+    setPickedLocation({
+      lat: location.coords.latitude,
+      lng: location.coords.longitude,
+    });
   }
 
   function pickOnMapHandler() {}
 
+  let locationPreview = <Text>No location picked yet.</Text>;
+
+  if (pickedLocation) {
+    locationPreview = (
+      <Image
+        style={styles.image}
+        source={{
+          uri: getMapPreview(pickedLocation.lat, pickedLocation.lng),
+        }}
+      />
+    );
+  }
+
   return (
     <View>
-      <View style={styles.mapPreview}></View>
+      <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
         <OutlinedButton icon="location" size={18} onPress={getLocationHandler}>
           Locate Me
@@ -57,10 +76,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: "hidden",
   },
   actions: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+  },
+  image: {
+    height: "100%",
+    width: "100%",
   },
 });
