@@ -10,8 +10,11 @@ import { Colors } from "../../constants/colors";
 import permissionsValidator from "../../core/helpers/permissionsValidator";
 import { useState } from "react";
 import { getMapPreview } from "../../core/util/location";
+import { useNavigation } from "@react-navigation/native";
 
 function LocationPicker() {
+  const navigation = useNavigation();
+
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
   const [pickedLocation, setPickedLocation] = useState();
@@ -35,7 +38,9 @@ function LocationPicker() {
     });
   }
 
-  function pickOnMapHandler() {}
+  function pickOnMapHandler() {
+    navigation.navigate("Map");
+  }
 
   let locationPreview = <Text>No location picked yet.</Text>;
 
