@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
 
 import { Colors } from "../../constants/colors";
@@ -8,10 +8,20 @@ import Button from "../UI/Button";
 
 function AdForm() {
   const [enteredTitle, setEnteredTitle] = useState("");
+  const [selectedImage, setSelectedImage] = useState();
+  const [pickedLocation, setPickedLocation] = useState();
 
   function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
   }
+
+  function takeImageHandler(imageUri) {
+    setSelectedImage(imageUri);
+  }
+
+  const onPickLocationHandler = useCallback((location) => {
+    setPickedLocation(location);
+  }, []);
 
   function savePlaceHandler() {
     console.log(enteredTitle);
@@ -29,8 +39,8 @@ function AdForm() {
           style={styles.input}
         />
       </View>
-      <ImagePicker />
-      <LocationPicker />
+      <ImagePicker onTakeImage={takeImageHandler} />
+      <LocationPicker onPickLocation={onPickLocationHandler} />
       <Button onPress={savePlaceHandler}>Add Ad</Button>
     </ScrollView>
   );
