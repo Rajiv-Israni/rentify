@@ -9,7 +9,7 @@ import {
 import OutlinedButton from "../UI/OutlinedButton";
 import { Colors } from "../../constants/colors";
 import permissionsValidator from "../../core/helpers/permissionsValidator";
-import { getMapPreview } from "../../core/util/location";
+import { getAddress, getMapPreview } from "../../core/util/location";
 import {
   useNavigation,
   useRoute,
@@ -37,7 +37,18 @@ function LocationPicker({ onPickLocation }) {
   }, [route, isFocused]);
 
   useEffect(() => {
-    onPickLocation(pickedLocation);
+    async function handleLocation() {
+      if (pickedLocation) {
+        const address = await getAddress(
+          pickedLocation.lat,
+          pickedLocation.lng
+        );
+
+        onPickLocation({ ...pickedLocation, address });
+      }
+    }
+
+    handleLocation();
   }, [pickedLocation, onPickLocation]);
 
   async function getLocationHandler() {
