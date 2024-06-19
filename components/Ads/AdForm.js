@@ -5,8 +5,9 @@ import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import Button from "../UI/Button";
+import { Ad } from "../../models/ad";
 
-function AdForm() {
+function AdForm({ onCreateAd }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setPickedLocation] = useState();
@@ -23,10 +24,9 @@ function AdForm() {
     setPickedLocation(location);
   }, []);
 
-  function savePlaceHandler() {
-    console.log(enteredTitle);
-    console.log(selectedImage);
-    console.log(pickedLocation);
+  function saveAdHandler() {
+    const ad = new Ad(enteredTitle, selectedImage, pickedLocation);
+    onCreateAd(ad);
   }
 
   return (
@@ -41,7 +41,7 @@ function AdForm() {
       </View>
       <ImagePicker onTakeImage={takeImageHandler} />
       <LocationPicker onPickLocation={onPickLocationHandler} />
-      <Button onPress={savePlaceHandler}>Add Ad</Button>
+      <Button onPress={saveAdHandler}>Add Ad</Button>
     </ScrollView>
   );
 }
