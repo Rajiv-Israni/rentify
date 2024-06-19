@@ -16,7 +16,7 @@ function AdsList({ ads }) {
     <FlatList
       data={ad}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <AdItem place={item} />}
+      renderItem={({ item }) => <AdItem ad={item} />}
     />
   );
 }

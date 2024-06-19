@@ -1,9 +1,9 @@
 import AdForm from "../components/Ads/AdForm";
 
 function AddAd({ navigation }) {
-  function createAdHandler(place) {
+  function createAdHandler(ad) {
     navigation.navigate("AllAds", {
-      place,
+      ad,
     });
   }
 
