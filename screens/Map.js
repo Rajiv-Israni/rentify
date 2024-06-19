@@ -33,7 +33,7 @@ function Map({ navigation }) {
       return;
     }
 
-    navigation.navigate("Add Ad", { pickedLocation });
+    navigation.navigate("AddAd", { pickedLocation });
   }, [navigation, pickedLocation]);
 
   useLayoutEffect(() => {

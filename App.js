@@ -23,7 +23,7 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="All Ads"
+            name="AllAds"
             component={AllAds}
             options={({ navigation }) => ({
               title: "Places Available To Rent",
@@ -32,13 +32,13 @@ export default function App() {
                   icon="add"
                   size={24}
                   color={tintColor}
-                  onPress={() => navigation.navigate("Add Ad")}
+                  onPress={() => navigation.navigate("AddAd")}
                 />
               ),
             })}
           />
           <Stack.Screen
-            name="Add Ad"
+            name="AddAd"
             component={AddAd}
             options={{
               title: "Add A New Place To Rent",

@@ -4,6 +4,7 @@ import AdItem from "./AdItem";
 import { Colors } from "../../constants/colors";
 
 function AdsList({ ads }) {
+  console.log(ads);
   if (!ads || ads.length === 0) {
     return (
       <View style={styles.fallbackContainer}>
@@ -14,7 +15,7 @@ function AdsList({ ads }) {
 
   return (
     <FlatList
-      data={ad}
+      data={ads}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <AdItem ad={item} />}
     />
