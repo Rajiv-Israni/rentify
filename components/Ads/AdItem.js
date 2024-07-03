@@ -1,5 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
+import { Colors } from "../../constants/colors";
+
 function AdItem({ ad, onSelect }) {
   return (
     <Pressable
