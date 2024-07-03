@@ -25,6 +25,9 @@ function AdsList({ ads }) {
 export default AdsList;
 
 const styles = StyleSheet.create({
+  list: {
+    margin: 24,
+  },
   fallbackContainer: {
     flex: 1,
     justifyContent: "center",
