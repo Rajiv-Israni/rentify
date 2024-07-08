@@ -1,7 +1,15 @@
 import AdForm from "../components/Ads/AdForm";
+import { insertAd } from "../core/util/database";
 
 function AddAd({ navigation }) {
-  function createAdHandler(ad) {
+  async function createAdHandler(ad) {
+    await insertAd(ad)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     navigation.navigate("AllAds", {
       ad,
     });
