@@ -6,7 +6,7 @@ function AdItem({ ad, onSelect }) {
   return (
     <Pressable
       style={({ pressed }) => [styles.item, pressed && styles.pressed]}
-      onPress={onSelect}
+      onPress={onSelect.bind(this, ad.id)}
     >
       <Image style={styles.image} source={{ uri: ad.imageUri }} />
       <View style={styles.info}>

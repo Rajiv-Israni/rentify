@@ -9,36 +9,35 @@ export async function init() {
           title TEXT NOT NULL,
           imageUri TEXT NOT NULL,
           address TEXT NOT NULL,
-          location NVARCHAR NOT NULL
+          lat REAL NOT NULL,
+          lng REAL NOT NULL
         )`);
 }
 
 export async function insertAd(ad) {
   return (await database).runAsync(
-    `INSERT INTO ads (title, imageUri, address, location) VALUES (?, ?, ?, {lat: ?, lng: ?})`,
-    [ad.title, ad.imageUri, ad.address, ad.location]
+    `INSERT INTO ads (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
+    [ad.title, ad.imageUri, ad.address, ad.location.lat, ad.location.lng]
   );
 }
 
 export async function fetchAds() {
-  const ads = [];
-  (await database).getAllAsync("SELECT * FROM ads", []).then((res) => {
-    // console.log(res);
+  return (await database).getAllAsync("SELECT * FROM ads", []).then((res) => {
+    const ads = [];
     for (const dp of res) {
-      console.log(dp.location);
       ads.push(
         new Ad(
           dp.title,
           dp.imageUri,
           {
             address: dp.address,
-            lat: dp.location.lat,
-            lng: dp.location.lng,
+            lat: dp.lat,
+            lng: dp.lng,
           },
           dp.id
         )
       );
     }
+    return ads;
   });
-  return ads;
 }

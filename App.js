@@ -6,9 +6,10 @@ import AppLoading from "expo-app-loading";
 
 import AllAds from "./screens/AllAds";
 import AddAd from "./screens/AddAd";
+import Map from "./screens/Map";
+import AdDetails from "./screens/AdDetails";
 import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
-import Map from "./screens/Map";
 import { init } from "./core/util/database";
 
 const Stack = createNativeStackNavigator();
@@ -65,6 +66,7 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Map" component={Map} />
+          <Stack.Screen name="AdDetails" component={AdDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
