@@ -4,7 +4,6 @@ import AdItem from "./AdItem";
 import { Colors } from "../../constants/colors";
 
 function AdsList({ ads }) {
-  console.log(ads);
   if (!ads || ads.length === 0) {
     return (
       <View style={styles.fallbackContainer}>

@@ -10,9 +10,7 @@ function AddAd({ navigation }) {
       .catch((err) => {
         console.log(err);
       });
-    navigation.navigate("AllAds", {
-      ad,
-    });
+    navigation.navigate("AllAds");
   }
 
   return <AdForm onCreateAd={createAdHandler} />;
