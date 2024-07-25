@@ -66,7 +66,13 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Map" component={Map} />
-          <Stack.Screen name="AdDetails" component={AdDetails} />
+          <Stack.Screen
+            name="AdDetails"
+            component={AdDetails}
+            options={{
+              title: "Loading Ad...",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

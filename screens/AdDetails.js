@@ -3,25 +3,33 @@ import { ScrollView, Image, View, Text, StyleSheet } from "react-native";
 
 import OutlinedButton from "../components/UI/OutlinedButton";
 import { Colors } from "../constants/colors";
-// import { fetchPlaceDetails } from "../util/database";
+import { fetchAdDetails } from "../core/util/database";
 
 function AdDetails({ route, navigation }) {
-  const [fetchedPlace, setFetchedPlace] = useState();
+  const [fetchedAd, setFetchedAd] = useState();
 
   function showOnMapHandler() {
     navigation.navigate("Map", {
-      initialLat: fetchedPlace.location.lat,
-      initialLng: fetchedPlace.location.lng,
+      initialLat: fetchedAd.location.lat,
+      initialLng: fetchedAd.location.lng,
     });
   }
 
   const selectedPlaceId = route.params.placeId;
 
   useEffect(() => {
-    // Code to fetch place data
+    async function loadAdDetails() {
+      const ad = await fetchAdDetails(selectedPlaceId);
+      setFetchedAd(ad);
+      navigation.setOptions({
+        title: ad.title,
+      });
+    }
+
+    loadAdDetails();
   }, [selectedPlaceId]);
 
-  if (!fetchedPlace) {
+  if (!fetchedAd) {
     return (
       <View style={styles.fallback}>
         <Text>Loading place data...</Text>
@@ -31,10 +39,10 @@ function AdDetails({ route, navigation }) {
 
   return (
     <ScrollView>
-      <Image style={styles.image} source={{ uri: fetchedPlace.imageUri }} />
+      <Image style={styles.image} source={{ uri: fetchedAd.imageUri }} />
       <View style={styles.locationContainer}>
         <View style={styles.addressContainer}>
-          <Text style={styles.address}>{fetchedPlace.address}</Text>
+          <Text style={styles.address}>{fetchedAd.address}</Text>
         </View>
         <OutlinedButton icon="map" onPress={showOnMapHandler}>
           View on Map

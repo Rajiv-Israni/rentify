@@ -41,3 +41,22 @@ export async function fetchAds() {
     return ads;
   });
 }
+
+export async function fetchAdDetails(id) {
+  return (await database)
+    .getAllAsync("SELECT * FROM ads WHERE id = ?", [id])
+    .then((res) => {
+      const dbAd = res[0];
+      const ad = new Ad(
+        dbAd.title,
+        dbAd.imageUri,
+        {
+          address: dbAd.address,
+          lat: dbAd.lat,
+          lng: dbAd.lng,
+        },
+        dbAd.id
+      );
+      return ad;
+    });
+}
